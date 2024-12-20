@@ -12,7 +12,6 @@ namespace Synapse.OrdersExample
         {
             var services = new ServiceCollection();
 
-          
             // if its in production use the actual implementation
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {

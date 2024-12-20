@@ -13,7 +13,7 @@ public class ProgramTests
         _mockOrderServiceClient = new Mock<IOrderServiceClient>();
         _mockLogger = new Mock<ILogger<Synapse.OrdersExample.Process>>();
 
-    _process = new Synapse.OrdersExample.Process(_mockOrderServiceClient.Object, _mockLogger.Object);
+        _process = new Synapse.OrdersExample.Process(_mockOrderServiceClient.Object, _mockLogger.Object);
     }
 
     [Fact]
