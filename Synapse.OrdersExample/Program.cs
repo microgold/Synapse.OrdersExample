@@ -30,7 +30,7 @@ namespace Synapse.OrdersExample
             }
             else
             {
-                services.AddScoped<IOrderServiceClient, OrderServiceClient>();
+                services.AddScoped<IOrderServiceClient, MockOrderServiceClient>();
             }
 
             services.AddLogging(loggingBuilder =>
