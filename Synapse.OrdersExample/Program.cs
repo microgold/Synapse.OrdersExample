@@ -1,16 +1,27 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Synapse.OrdersExample
 {
     /// <summary>
-    /// Main program class to process orders.
+    /// Main program class for initializing Process and services.
     /// </summary>
     public class Program
     {
         private static IServiceProvider ConfigureServices()
         {
             var services = new ServiceCollection();
+
+            // Build configuration
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            services.AddSingleton<IConfiguration>(configuration);
+
+
 
             // if its in production use the actual implementation
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
@@ -19,7 +30,7 @@ namespace Synapse.OrdersExample
             }
             else
             {
-                services.AddScoped<IOrderServiceClient, MockOrderServiceClient>();
+                services.AddScoped<IOrderServiceClient, OrderServiceClient>();
             }
 
             services.AddLogging(loggingBuilder =>
